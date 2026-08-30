@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineWave · Modern Ticket Booking</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="top-nav">
+            <div class="brand">
+                <div class="logo-orb"></div>
+                <div class="brand-text">
+                    <h1 class="gradient-text">CineWave</h1>
+                    <p>Booking Management Desk</p>
+                </div>
+            </div>
+            <div class="persona-switch">
+                <button id="btnCustomer" class="active">Customer</button>
+                <button id="btnAgent">Booking Agent</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- New Request Form (Only visible to Customer) -->
+            <section id="requestSection" class="glass-panel slide-up">
+                <h2 class="section-title"><span>01</span> Submit Movie Ticket Request</h2>
+                <form id="bookingForm" class="form-grid">
+                    <div class="input-group">
+                        <label for="showSelect">Select Show</label>
+                        <select id="showSelect" required>
+                            <option value="" disabled selected>Loading shows...</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="ticketCount">Number of Tickets</label>
+                        <input type="number" id="ticketCount" min="1" value="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="customerName">Full Name</label>
+                        <input type="text" id="customerName" placeholder="e.g. Jane Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="customerEmail">Email Address</label>
+                        <input type="email" id="customerEmail" placeholder="jane@example.com" required>
+                    </div>
+                    <div id="formErrors" class="error-msg hidden"></div>
+                    <button type="submit" class="btn-primary form-submit">
+                        Submit Request
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Cases Grid -->
+            <section class="cases-section">
+                <h2 id="queueTitle" class="section-title">My Booking Requests</h2>
+                <div id="emptyState" class="empty-state hidden">
+                    <div class="empty-icon">🎬</div>
+                    <p>No tickets in your queue.</p>
+                </div>
+                <div id="casesGrid" class="cases-grid">
+                    <!-- Cards will be dynamically injected here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="stage-flow">
+                    <span>Booking Request</span>
+                    <span class="arrow">→</span>
+                    <span>Availability</span>
+                    <span class="arrow">→</span>
+                    <span>Approval</span>
+                    <span class="arrow">→</span>
+                    <span>Execution</span>
+                    <span class="arrow">→</span>
+                    <span>Resolved</span>
+                </div>
+                <p>SLA Goal: 1 Day / Deadline: 2 Days</p>
+            </div>
+        </footer>
+
+        <!-- Modal -->
+        <div id="emailModal" class="modal-overlay hidden">
+            <div class="modal-content glass-panel scale-up">
+                <div class="modal-header">
+                    <h3>Booking Confirmation Email</h3>
+                    <button id="closeModal" class="btn-icon">✕</button>
+                </div>
+                <div class="modal-body">
+                    <p class="mail-to">To: <span id="mailTo"></span></p>
+                    <pre id="mailBody"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
